@@ -6,23 +6,19 @@ import { CollectionDataType, PlaceTypes } from '../slices/placesSlice';
 export const getPlaces = createAsyncThunk(
   'places/getList',
   async () => {
-    const responseData = await firebase.firestore().collection('places').get()
+    const responseData = await firebase.firestore()
+      .collection('places').get()
       .then(response => response.docs
         .map(x => ({
           id: x.id,
-          data: x.data(),
-          parts: x.data().parts && x.data().parts.map((part: { id: string; }) => part.id),
-        }))
-        .map(({ id, data, parts }) => ({
-          id,
-          name: data.name,
-          parts,
+          name: x.data().name,
+          parts: x.data().parts,
         })),
       );
 
     return {
       structure: createStructure(responseData) as PlaceTypes[],
-      collection: responseData as CollectionDataType[]
+      collection: responseData as CollectionDataType[],
     };
   },
 );

@@ -10,14 +10,9 @@ export const getInventory = createAsyncThunk(
       .then(response => response.docs
         .map(x => ({
           id: x.id,
-          data: x.data(),
-          placeId: x.data().place?.id,
-        }))
-        .map(item => ({
-          id: item.id,
-          name: item.data.name,
-          count: item.data.count,
-          placeId: item.placeId,
+          name: x.data().name,
+          placeId: x.data().placeId,
+          count: x.data().count,
         })),
       );
 
@@ -33,26 +28,22 @@ type AddInventoryFormType = {
 
 export const addInventory = createAsyncThunk(
   'inventory/addItem',
-  async ({ name, count, place }: AddInventoryFormType, API)  => {
+  async ({ name, count, place }: AddInventoryFormType, API) => {
     firebase.firestore().collection('inventory').doc().set({
       name,
       count,
-      place: firebase.firestore().collection('places').doc(place),
+      placeId: place,
     }).then(() => {
-      console.info('Done');
+      API.dispatch(getInventory());
     });
-
-    API.dispatch(getInventory());
   },
 );
 
 export const deleteInventory = createAsyncThunk(
   'inventory/deleteItem',
-  async ({ id }: ({ id: string }), API)  => {
+  async ({ id }: ({ id: string }), API) => {
     firebase.firestore().collection('inventory').doc(id).delete().then(() => {
-      console.info('Done');
-  });
-
-    API.dispatch(getInventory());
+      API.dispatch(getInventory());
+    });
   },
 );
