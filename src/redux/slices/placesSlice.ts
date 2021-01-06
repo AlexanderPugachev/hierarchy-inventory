@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getPlaces } from '../thunks/placesThunks';
 
-export type PlaceTypes = {
+export type PlaceType = {
   id: string,
   name: string,
-  children: PlaceTypes[] | undefined
+  children: PlaceType[] | undefined
 };
 
 export type CollectionDataType = {
@@ -20,7 +20,7 @@ export type SelectedPlaceType = {
 }
 
 type stateTypes = {
-  list: PlaceTypes[],
+  list: PlaceType[],
   collection: CollectionDataType[],
   selected: SelectedPlaceType
 }

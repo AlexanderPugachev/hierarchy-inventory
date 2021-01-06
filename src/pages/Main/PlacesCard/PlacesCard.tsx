@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { Card, Structure } from '../../../components';
+import { Card } from '../../../components';
 import { placesActions } from '../../../redux/slices/placesSlice';
+import { Structure } from './Structure/Structure';
 
 const PlacesCard: React.FC = () => {
   const { list, selected } = useSelector((s: RootState) => s.places);

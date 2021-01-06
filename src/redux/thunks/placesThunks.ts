@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { CollectionDataType, PlaceTypes } from '../slices/placesSlice';
+import { CollectionDataType, PlaceType } from '../slices/placesSlice';
 
 export const getPlaces = createAsyncThunk(
   'places/getList',
@@ -17,23 +17,23 @@ export const getPlaces = createAsyncThunk(
       );
 
     return {
-      structure: createStructure(responseData) as PlaceTypes[],
+      structure: createStructure(responseData) as PlaceType[],
       collection: responseData as CollectionDataType[],
     };
   },
 );
 
-const createStructure = (data: CollectionDataType[]): Array<PlaceTypes | undefined> => {
+const createStructure = (data: CollectionDataType[]): Array<PlaceType | undefined> => {
   const childrenId: string[] = [];
   data.forEach(({ parts }) => parts && childrenId.push(...parts));
 
-  const getChildren = (parts: string[]): Array<PlaceTypes> => parts.map((item) => {
+  const getChildren = (parts: string[]): Array<PlaceType> => parts.map((item) => {
     const child = data.find(({ id }) => id === item);
     return ({
       id: child?.id,
       name: child?.name,
       children: child?.parts ? getChildren(child.parts) : undefined,
-    }) as PlaceTypes;
+    }) as PlaceType;
   });
 
   return data
