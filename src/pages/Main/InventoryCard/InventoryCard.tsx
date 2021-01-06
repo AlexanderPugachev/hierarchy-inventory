@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Card from '../../../components/Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { InventoryType } from '../../../redux/slices/inventorySlice';
-import { ColumnItemType, Table } from '../../../components/Table/Table';
-import Button from '../../../components/Button/Button';
+import { Button, Table, Card, ColumnItemType } from '../../../components';
 import AddInventoryDrawer from '../AddInventoryDrawer/AddInventoryDrawer';
 import { deleteInventory } from '../../../redux/thunks/InventoryThunks';
 import { commonActions, DrawersId } from '../../../redux/slices/commonSlice';

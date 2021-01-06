@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import Drawer from '../../../components/Drawer/Drawer';
 import { useForm } from 'react-hook-form';
-import Button from '../../../components/Button/Button';
-import { Form } from '../../../components/Form/Form';
 import { useDispatch, useSelector } from 'react-redux';
+import { Drawer, Button, Form } from '../../../components';
 import { addInventory, updateInventory } from '../../../redux/thunks/InventoryThunks';
 import { RootState } from '../../../redux/store';
 import { commonActions, DrawersId } from '../../../redux/slices/commonSlice';
@@ -61,15 +59,8 @@ const AddInventoryDrawer: React.FC = () => {
     },
   ];
 
-  const setVisible = (bool: boolean) => {
-    dispatch(commonActions.setDrawer({
-      visible: bool,
-      id: DrawersId.AddInventory,
-    }));
-  }
-
   return (
-    <Drawer title="Добавление оборудования" visible={drawer?.visible ?? false} setVisible={setVisible}>
+    <Drawer title="Добавление оборудования" id={DrawersId.AddInventory}>
       <Form formData={{ control, errors, content }} onSubmit={onSubmit}>
         <Button type="submit">Добавить</Button>
       </Form>

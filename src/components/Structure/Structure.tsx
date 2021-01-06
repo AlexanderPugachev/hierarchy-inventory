@@ -12,7 +12,7 @@ type StructureType = {
   selectAction: ActionCreatorWithPayload<SelectedPlaceType>
 }
 
-const Structure: React.FC<StructureType> = ({ data, selected, selectAction }) => {
+export const Structure: React.FC<StructureType> = ({ data, selected, selectAction }) => {
   const dispatch = useDispatch();
   const { list } = useSelector((s: RootState) => s.inventory);
 
@@ -43,5 +43,3 @@ const Structure: React.FC<StructureType> = ({ data, selected, selectAction }) =>
     </Container>
   );
 };
-
-export default Structure;

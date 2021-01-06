@@ -6,7 +6,7 @@ type CardType = {
   extra?: React.ReactNode | boolean
 }
 
-const Card: React.FC<CardType> = ({ title, extra, children}) => {
+export const Card: React.FC<CardType> = ({ title, extra, children}) => {
   return (
     <Container>
       {(title || extra) &&
@@ -19,5 +19,3 @@ const Card: React.FC<CardType> = ({ title, extra, children}) => {
     </Container>
   );
 };
-
-export default Card;
