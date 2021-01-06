@@ -76,11 +76,10 @@ const InventoryCard: React.FC = () => {
       }`}
     >
       {listData?.length ? (
-        <Table columns={columns} data={listData} />
+        <Table<InventoryType> columns={columns} data={listData} />
       ) : (
-        `В выбранном ${
-          selected.isRoom ? 'помещении' : 'здании/крыле'
-        } нет оборудования`
+        `В выбранном ${selected.isRoom ? 'помещении' : 'здании/крыле'}` +
+        ' нет оборудования'
       )}
 
       <AddInventoryDrawer />
