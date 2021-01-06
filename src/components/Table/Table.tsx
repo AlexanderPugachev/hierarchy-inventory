@@ -2,22 +2,22 @@ import React, { FC } from 'react';
 import { Container, HeadItem } from './styles';
 import {InventoryType} from '../../redux/slices/inventorySlice';
 
-export type ColumnItemType = {
+export type ColumnItemType<T> = {
   title?: string
-  dataName: keyof InventoryType
+  dataName: keyof T
   key: string
-  render?: (item: string | number | undefined, record: InventoryType) => React.ReactNode | string
+  render?: (item: string | number, record: T) => React.ReactNode | string
 }
 
-type PropsType = {
-  columns: ColumnItemType[];
-  data: InventoryType[];
-  rowKey?: keyof InventoryType;
+type PropsType<T> = {
+  columns: ColumnItemType<T>[];
+  data: T[];
+  rowKey?: keyof T;
   borderless?: boolean;
   headless?: boolean;
 }
 
-export const Table: FC<PropsType> = ({
+export const Table: FC<PropsType<InventoryType>> = ({
   columns = [],
   data,
   rowKey = 'id',

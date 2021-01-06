@@ -28,7 +28,7 @@ const InventoryCard: React.FC = () => {
     }
   }, [list, selected, collection]);
 
-  const columns: ColumnItemType[] = [
+  const columns: ColumnItemType<InventoryType>[] = [
     {
       title: 'Наименование',
       dataName: 'name',
