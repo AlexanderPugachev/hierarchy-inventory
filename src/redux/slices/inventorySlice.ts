@@ -5,7 +5,7 @@ export type InventoryType = {
   id: string,
   name: string,
   count: number,
-  placeId?: string
+  placeId: string
 };
 
 type stateTypes = {
@@ -27,7 +27,6 @@ const { reducer } = createSlice({
   }
 });
 
-export const inventoryActions = {
-};
+export const inventoryActions = {};
 
 export default reducer;

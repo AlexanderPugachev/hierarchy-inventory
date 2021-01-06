@@ -7,13 +7,13 @@ import { ColumnItemType, Table } from '../../../components/Table/Table';
 import Button from '../../../components/Button/Button';
 import AddInventoryDrawer from '../AddInventoryDrawer/AddInventoryDrawer';
 import { deleteInventory } from '../../../redux/thunks/InventoryThunks';
+import { commonActions, DrawersId } from '../../../redux/slices/commonSlice';
 
 const InventoryCard: React.FC = () => {
   const dispatch = useDispatch();
   const { collection, selected } = useSelector((s: RootState) => s.places);
   const { list } = useSelector((s: RootState) => s.inventory);
   const [listData, setListData] = useState<InventoryType[] | null>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (selected.id) {
@@ -44,16 +44,29 @@ const InventoryCard: React.FC = () => {
     {
       dataName: 'id',
       key: 'actions',
-      render: id =>
-        <Button
-          onClick={() => dispatch(deleteInventory({ id: `${id}` }))}
-        >Удалить</Button>,
+      render: (id, record) =>
+        <>
+          <Button
+            onClick={() => dispatch(deleteInventory({ id: `${id}` }))}
+          >Удалить</Button>
+          <Button
+            onClick={() => handleAdd(record)}
+          >Изменить</Button>
+        </>,
     },
   ];
 
+  const handleAdd = (record?: InventoryType | undefined) => {
+    dispatch(commonActions.setDrawer({
+      visible: true,
+      id: DrawersId.AddInventory,
+      data: record
+    }));
+  }
+
   return (
     <Card
-      extra={selected.isRoom && <Button onClick={() => setVisible(true)}>Добавить оборудование</Button>}
+      extra={selected.isRoom && <Button onClick={() => handleAdd()}>Добавить оборудование</Button>}
       title={`Оборудование ${selected.isRoom ? 'помещения' : 'здания/крыла'}: ${selected?.name ?? 'Не выбрано'}`}
     >
       {listData?.length ?
@@ -63,7 +76,7 @@ const InventoryCard: React.FC = () => {
         />
         : `В выбранном ${selected.isRoom ? 'помещении' : 'здании/крыле'} нет оборудования`}
 
-      <AddInventoryDrawer setVisible={setVisible} visible={visible} />
+      <AddInventoryDrawer />
     </Card>
   );
 };

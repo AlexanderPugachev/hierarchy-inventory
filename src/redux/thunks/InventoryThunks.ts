@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { InventoryType } from '../slices/inventorySlice';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { commonActions, DrawersId } from '../slices/commonSlice';
 
 export const getInventory = createAsyncThunk(
   'inventory/getList',
@@ -20,21 +21,21 @@ export const getInventory = createAsyncThunk(
   },
 );
 
-type AddInventoryFormType = {
-  name: string
-  count: string
-  place: string
-}
+type AddInventoryType = Omit<InventoryType, 'id'>
 
 export const addInventory = createAsyncThunk(
   'inventory/addItem',
-  async ({ name, count, place }: AddInventoryFormType, API) => {
+  async ({ name, count, placeId }: AddInventoryType, API) => {
     firebase.firestore().collection('inventory').doc().set({
       name,
       count,
-      placeId: place,
+      placeId,
     }).then(() => {
       API.dispatch(getInventory());
+      API.dispatch(commonActions.setDrawer({
+        visible: false,
+        id: DrawersId.AddInventory,
+      }));
     });
   },
 );
@@ -44,6 +45,23 @@ export const deleteInventory = createAsyncThunk(
   async ({ id }: ({ id: string }), API) => {
     firebase.firestore().collection('inventory').doc(id).delete().then(() => {
       API.dispatch(getInventory());
+    });
+  },
+);
+
+export const updateInventory = createAsyncThunk(
+  'inventory/updateInventory',
+  async ({ id, name, count, placeId }: InventoryType, API) => {
+    firebase.firestore().collection('inventory').doc(id).set({
+      name,
+      count,
+      placeId,
+    }).then(() => {
+      API.dispatch(getInventory());
+      API.dispatch(commonActions.setDrawer({
+        visible: false,
+        id: DrawersId.AddInventory,
+      }));
     });
   },
 );
