@@ -2,10 +2,10 @@ import React from 'react';
 import { Container } from './styles';
 
 type BadgeType = {
-  count: number
-}
+  count: number;
+};
 
-const Badge: React.FC<BadgeType> = ({count}) => {
+const Badge: React.FC<BadgeType> = ({ count }) => {
   return count ? <Container>{count}</Container> : <></>;
 };
 

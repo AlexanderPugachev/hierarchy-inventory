@@ -4,9 +4,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1);
-  
+
   > :nth-child(1n) {
-    padding: ${p => p.theme.spaces.m};
+    padding: ${(p) => p.theme.spaces.m};
   }
 `;
 

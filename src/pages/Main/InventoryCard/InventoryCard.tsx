@@ -19,12 +19,13 @@ const InventoryCard: React.FC = () => {
 
       const getPlacesById = (id: string) => {
         places.push(id);
-        collection.find(item => item.id === id)
-          ?.parts?.forEach(item => getPlacesById(item));
+        collection
+          .find((item) => item.id === id)
+          ?.parts?.forEach((item) => getPlacesById(item));
       };
       getPlacesById(selected.id);
 
-      setListData(list.filter(item => places.includes(item?.placeId ?? '')));
+      setListData(list.filter((item) => places.includes(item?.placeId ?? '')));
     }
   }, [list, selected, collection]);
 
@@ -42,37 +43,45 @@ const InventoryCard: React.FC = () => {
     {
       dataName: 'id',
       key: 'actions',
-      render: (id, record) =>
+      render: (id, record) => (
         <>
-          <Button
-            onClick={() => dispatch(deleteInventory({ id: `${id}` }))}
-          >Удалить</Button>
-          <Button
-            onClick={() => handleAdd(record)}
-          >Изменить</Button>
-        </>,
+          <Button onClick={() => dispatch(deleteInventory({ id: `${id}` }))}>
+            Удалить
+          </Button>
+          <Button onClick={() => handleAdd(record)}>Изменить</Button>
+        </>
+      ),
     },
   ];
 
   const handleAdd = (record?: InventoryType | undefined) => {
-    dispatch(commonActions.setDrawer({
-      visible: true,
-      id: DrawersId.AddInventory,
-      data: record
-    }));
-  }
+    dispatch(
+      commonActions.setDrawer({
+        visible: true,
+        id: DrawersId.AddInventory,
+        data: record,
+      }),
+    );
+  };
 
   return (
     <Card
-      extra={selected.isRoom && <Button onClick={() => handleAdd()}>Добавить оборудование</Button>}
-      title={`Оборудование ${selected.isRoom ? 'помещения' : 'здания/крыла'}: ${selected?.name ?? 'Не выбрано'}`}
+      extra={
+        selected.isRoom && (
+          <Button onClick={() => handleAdd()}>Добавить оборудование</Button>
+        )
+      }
+      title={`Оборудование ${selected.isRoom ? 'помещения' : 'здания/крыла'}: ${
+        selected?.name ?? 'Не выбрано'
+      }`}
     >
-      {listData?.length ?
-        <Table
-          columns={columns}
-          data={listData}
-        />
-        : `В выбранном ${selected.isRoom ? 'помещении' : 'здании/крыле'} нет оборудования`}
+      {listData?.length ? (
+        <Table columns={columns} data={listData} />
+      ) : (
+        `В выбранном ${
+          selected.isRoom ? 'помещении' : 'здании/крыле'
+        } нет оборудования`
+      )}
 
       <AddInventoryDrawer />
     </Card>

@@ -19,7 +19,7 @@ const Main: React.FC = () => {
       <PlacesCard />
       <InventoryCard />
     </Container>
-    );
+  );
 };
 
 export default Main;

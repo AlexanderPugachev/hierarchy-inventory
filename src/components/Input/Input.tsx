@@ -1,18 +1,31 @@
 import React from 'react';
-import { Control, Controller, RegisterOptions, FieldError } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  RegisterOptions,
+  FieldError,
+} from 'react-hook-form';
 import { Container, ErrorText, StyledInput } from './styles';
 
 export type InputType = {
-  control?: Control
-  defaultValue?: string | number
-  label: string
-  name: string
-  error?: FieldError
-  rules: RegisterOptions
-  type?: string
-}
+  control?: Control;
+  defaultValue?: string | number;
+  label: string;
+  name: string;
+  error?: FieldError;
+  rules: RegisterOptions;
+  type?: string;
+};
 
-const Input: React.FC<InputType> = ({ control, label, name, rules, type = 'text', error, defaultValue = '' }) => {
+const Input: React.FC<InputType> = ({
+  control,
+  label,
+  name,
+  rules,
+  type = 'text',
+  error,
+  defaultValue = '',
+}) => {
   return (
     <Container>
       {label && label}

@@ -5,9 +5,9 @@ import { commonActions } from '../../redux/slices/commonSlice';
 import { RootState } from '../../redux/store';
 
 type DrawerProps = {
-  title?: string
-  id: number
-}
+  title?: string;
+  id: number;
+};
 
 export const Drawer: React.FC<DrawerProps> = ({ title, children, id }) => {
   const dispatch = useDispatch();

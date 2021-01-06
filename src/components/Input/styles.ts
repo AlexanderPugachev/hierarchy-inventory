@@ -5,7 +5,7 @@ export const StyledInput = styled.input`
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid #094c66;
-  padding: ${p => p.theme.spacing([2])};
+  padding: ${(p) => p.theme.spacing([2])};
 `;
 
 export const Container = styled.div`

@@ -3,21 +3,21 @@ import { InventoryType } from './inventorySlice';
 
 export enum DrawersId {
   'AddInventory',
-  'AddPlace'
+  'AddPlace',
 }
 
 type DrawerType = {
-  visible: boolean,
-  data?: InventoryType
-}
+  visible: boolean;
+  data?: InventoryType;
+};
 
 type StateType = {
-  drawers: { [key: string]: DrawerType }
-}
+  drawers: { [key: string]: DrawerType };
+};
 
 type SetDrawerType = DrawerType & {
-  id: number
-}
+  id: number;
+};
 
 const initialState: StateType = {
   drawers: {},
@@ -28,7 +28,8 @@ const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     setDrawer: (s, a: { payload: SetDrawerType }) => {
-      if (!(a.payload.id in s.drawers)) s.drawers[a.payload.id] = { visible: false };
+      if (!(a.payload.id in s.drawers))
+        s.drawers[a.payload.id] = { visible: false };
 
       s.drawers[a.payload.id].visible = a.payload.visible;
       s.drawers[a.payload.id].data = a.payload.data;

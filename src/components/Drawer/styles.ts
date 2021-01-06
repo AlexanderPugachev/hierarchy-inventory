@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 type ContainerType = {
-  visible: boolean
-}
+  visible: boolean;
+};
 
 export const Container = styled.div<ContainerType>`
   position: fixed;
@@ -15,15 +15,15 @@ export const Container = styled.div<ContainerType>`
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  z-index: ${p => p.theme.zIndex.drawers};
-  
-  visibility: ${p => p.visible ? 'visible' : 'hidden'};
-  opacity: ${p => p.visible ? 1 : 0};
-  margin-right: ${p => p.visible ? 0 : '-200px'};
+  z-index: ${(p) => p.theme.zIndex.drawers};
+
+  visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
+  opacity: ${(p) => (p.visible ? 1 : 0)};
+  margin-right: ${(p) => (p.visible ? 0 : '-200px')};
   transition: opacity, margin-right 150ms ease-in-out, visibility 200ms;
-  
+
   > :nth-child(1n) {
-    padding: ${p => p.theme.spaces.m};
+    padding: ${(p) => p.theme.spaces.m};
   }
 `;
 
@@ -42,5 +42,5 @@ export const DrawerWrap = styled.div`
   bottom: 0;
   left: 0;
   right: 500px;
-  z-index: ${p => p.theme.zIndex.drawersWrap};
+  z-index: ${(p) => p.theme.zIndex.drawersWrap};
 `;

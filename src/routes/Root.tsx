@@ -16,11 +16,7 @@ const Root: React.FC = () => {
     !firebaseLoaded && dispatch(initFirebase());
   }, [firebaseLoaded, dispatch]);
 
-  return (
-    <>
-      {firebaseLoaded ? <Main /> : 'Нет соединения'}
-    </>
-  );
+  return <>{firebaseLoaded ? <Main /> : 'Нет соединения'}</>;
 };
 
 export default Root;

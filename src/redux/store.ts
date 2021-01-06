@@ -12,7 +12,7 @@ export const store = configureStore({
     inventory: inventoryReducer,
     places: placesReducer,
   },
-  middleware: getDefaultMiddleware => [...getDefaultMiddleware()],
+  middleware: (getDefaultMiddleware) => [...getDefaultMiddleware()],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -6,31 +6,25 @@ import { StyledForm } from './styled';
 interface FormType extends React.FormHTMLAttributes<HTMLFormElement> {
   align?: string;
   formData?: {
-    control: Control,
-    errors: FieldErrors,
-    content: InputType[]
-  }
+    control: Control;
+    errors: FieldErrors;
+    content: InputType[];
+  };
 }
 
-export const Form: FC<FormType> = (
-  {
-    onSubmit,
-    children,
-    formData,
-    align,
-  },
-) => {
+export const Form: FC<FormType> = ({ onSubmit, children, formData, align }) => {
   return (
     <StyledForm align={align} onSubmit={onSubmit}>
-      {formData && formData.content.map(({ name, ...rest }) => (
-        <Input
-          {...rest}
-          key={name}
-          control={formData.control}
-          error={formData.errors[name]}
-          name={name}
-        />
-      ))}
+      {formData &&
+        formData.content.map(({ name, ...rest }) => (
+          <Input
+            {...rest}
+            key={name}
+            control={formData.control}
+            error={formData.errors[name]}
+            name={name}
+          />
+        ))}
       {children}
     </StyledForm>
   );

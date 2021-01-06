@@ -1,13 +1,13 @@
 type spacingType = (arr: number[], multiplier?: number) => string;
 
-const spacing: spacingType = (arr, multiplier = 4) => arr
-  .reduce((res, el) => `${res}${el * multiplier}px `, '');
+const spacing: spacingType = (arr, multiplier = 4) =>
+  arr.reduce((res, el) => `${res}${el * multiplier}px `, '');
 
 export const mainTheme = {
   spacing,
 
   spaces: {
-    xxs: spacing([.5]),
+    xxs: spacing([0.5]),
     xs: spacing([1]),
     s: spacing([2]),
     m: spacing([3]),

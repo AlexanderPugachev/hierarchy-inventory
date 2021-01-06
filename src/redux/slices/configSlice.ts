@@ -9,8 +9,8 @@ const { reducer } = createSlice({
   name: 'config',
   initialState,
   reducers: {},
-  extraReducers: builder => {
-    builder.addCase(initFirebase.fulfilled, s => {
+  extraReducers: (builder) => {
+    builder.addCase(initFirebase.fulfilled, (s) => {
       s.firebaseLoaded = true;
     });
   },
