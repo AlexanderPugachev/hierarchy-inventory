@@ -5,6 +5,7 @@ import InventoryCard from './InventoryCard/InventoryCard';
 import PlacesCard from './PlacesCard/PlacesCard';
 import { getInventory } from '../../redux/thunks/InventoryThunks';
 import { getPlaces } from '../../redux/thunks/placesThunks';
+import { Notices } from '../../components';
 
 const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,10 +16,14 @@ const Main: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Container>
-      <PlacesCard />
-      <InventoryCard />
-    </Container>
+    <>
+      <Container>
+        <PlacesCard />
+        <InventoryCard />
+      </Container>
+
+      <Notices/>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import commonReducer from './slices/commonSlice';
 import configReducer from './slices/configSlice';
 import inventoryReducer from './slices/inventorySlice';
+import noticesReducer from './slices/noticesSlice';
 import placesReducer from './slices/placesSlice';
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     common: commonReducer,
     config: configReducer,
     inventory: inventoryReducer,
+    notices: noticesReducer,
     places: placesReducer,
   },
   middleware: (getDefaultMiddleware) => [...getDefaultMiddleware()],

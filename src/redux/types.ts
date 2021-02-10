@@ -1,3 +1,4 @@
+import Timeout = NodeJS.Timeout;
 
 export type InventoryType = {
   id: string;
@@ -37,9 +38,16 @@ export type PlaceType = {
   children: PlaceType[] | undefined;
 };
 
-
 export type SelectedPlaceType = {
   id: string | null;
   name: string | null;
   isRoom?: boolean;
 };
+
+export type NoticeType = {
+  id: string;
+  text: string;
+  delay: number;
+  type: 'error' | 'success' | 'warning' | 'waiting';
+  timer: any;
+}

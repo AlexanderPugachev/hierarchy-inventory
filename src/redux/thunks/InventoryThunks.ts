@@ -8,6 +8,7 @@ import {
   InventoryType,
 } from '../types';
 import { createHashTable } from '../../utils';
+import { noticesActions } from '../slices/noticesSlice';
 
 export const getInventory = createAsyncThunk('inventory/getList', async () => {
   const data = await firebase
@@ -49,6 +50,12 @@ export const addInventory = createAsyncThunk(
             id: DrawersId.AddInventory,
           }),
         );
+        API.dispatch(noticesActions.addNotice({
+          id: API.requestId,
+          delay: 3000,
+          text: `${name} added`,
+          type: 'success'
+        }));
       });
   },
 );
@@ -63,6 +70,12 @@ export const deleteInventory = createAsyncThunk(
       .delete()
       .then(() => {
         API.dispatch(getInventory());
+        API.dispatch(noticesActions.addNotice({
+          id: API.requestId,
+          delay: 3000,
+          text: 'Inventory deleted',
+          type: 'success'
+        }));
       });
   },
 );
@@ -87,6 +100,12 @@ export const updateInventory = createAsyncThunk(
             id: DrawersId.AddInventory,
           }),
         );
+        API.dispatch(noticesActions.addNotice({
+          id: API.requestId,
+          delay: 3000,
+          text: 'Inventory updated',
+          type: 'success'
+        }))
       });
   },
 );
