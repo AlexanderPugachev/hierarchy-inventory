@@ -1,13 +1,10 @@
 import React from 'react';
 import { Container, Item, Level } from './styles';
-import {
-  PlaceType,
-  SelectedPlaceType,
-} from '../../../../redux/slices/placesSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { RootState } from '../../../../redux/store';
 import Badge from '../../../../components/Badge/Badge';
+import { PlaceType, SelectedPlaceType } from '../../../../redux/types';
 
 type StructureType = {
   data: PlaceType[];

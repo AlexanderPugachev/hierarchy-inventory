@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { InventoryType } from '../../../redux/slices/inventorySlice';
 import { Button, Table, Card, ColumnItemType } from '../../../components';
 import AddInventoryDrawer from '../AddInventoryDrawer/AddInventoryDrawer';
 import { deleteInventory } from '../../../redux/thunks/InventoryThunks';
 import { commonActions, DrawersId } from '../../../redux/slices/commonSlice';
+import { InventoryType } from '../../../redux/types';
 
 const InventoryCard: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,7 @@ const InventoryCard: React.FC = () => {
 
       const getPlacesById = (id: string) => {
         places.push(id);
-        collection
-          .find((item) => item.id === id)
-          ?.parts?.forEach((item) => getPlacesById(item));
+        collection[id]?.parts?.forEach((item) => getPlacesById(item));
       };
       getPlacesById(selected.id);
 

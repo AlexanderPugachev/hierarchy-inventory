@@ -1,33 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getPlaces } from '../thunks/placesThunks';
-
-export type PlaceType = {
-  id: string;
-  name: string;
-  children: PlaceType[] | undefined;
-};
-
-export type CollectionDataType = {
-  id: string;
-  name: string;
-  parts: string[];
-};
-
-export type SelectedPlaceType = {
-  id: string | null;
-  name: string | null;
-  isRoom?: boolean;
-};
+import {
+  PlacesHash,
+  PlaceType,
+  SelectedPlaceType,
+} from '../types';
 
 type stateTypes = {
   list: PlaceType[];
-  collection: CollectionDataType[];
+  collection: PlacesHash;
   selected: SelectedPlaceType;
 };
 
 const initialState: stateTypes = {
   list: [],
-  collection: [],
+  collection: {},
   selected: {
     id: null,
     name: null,
@@ -39,7 +26,7 @@ const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     setSelected: (s, a) => {
-      const current = s.collection.find((item) => item.id === a.payload.id);
+      const current = s.collection[a.payload.id];
 
       s.selected = a.payload;
       s.selected.isRoom = !current?.parts?.length;

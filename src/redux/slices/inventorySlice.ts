@@ -1,19 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getInventory } from '../thunks/InventoryThunks';
-
-export type InventoryType = {
-  id: string;
-  name: string;
-  count: number;
-  placeId: string;
-};
+import { InventoryHash, InventoryType } from '../types';
 
 type stateTypes = {
+  collection: InventoryHash;
   list: InventoryType[];
 };
 
 const initialState: stateTypes = {
   list: [],
+  collection: {}
 };
 
 const { reducer } = createSlice({
@@ -22,7 +18,8 @@ const { reducer } = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getInventory.fulfilled, (s, a) => {
-      s.list = a.payload;
+      s.list = a.payload.list;
+      s.collection = a.payload.collection;
     });
   },
 });

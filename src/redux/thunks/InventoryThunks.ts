@@ -1,8 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { InventoryType } from '../slices/inventorySlice';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { commonActions, DrawersId } from '../slices/commonSlice';
+import {
+  AddInventoryType,
+  InventoryHash,
+  InventoryType,
+} from '../types';
+import { createHashTable } from '../../utils';
 
 export const getInventory = createAsyncThunk('inventory/getList', async () => {
   const data = await firebase
@@ -18,10 +23,11 @@ export const getInventory = createAsyncThunk('inventory/getList', async () => {
       })),
     );
 
-  return data as InventoryType[];
+  return {
+    list: data as InventoryType[],
+    collection: createHashTable(data) as InventoryHash,
+  };
 });
-
-type AddInventoryType = Omit<InventoryType, 'id'>;
 
 export const addInventory = createAsyncThunk(
   'inventory/addItem',
@@ -62,7 +68,7 @@ export const deleteInventory = createAsyncThunk(
 );
 
 export const updateInventory = createAsyncThunk(
-  'inventory/updateInventory',
+  'inventory/updateItem',
   async ({ id, name, count, placeId }: InventoryType, API) => {
     firebase
       .firestore()

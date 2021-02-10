@@ -5,12 +5,12 @@ export const initFirebase = createAsyncThunk(
   'config/initFirebase',
   async () => {
     const firebaseConfig = {
-      apiKey: 'AIzaSyBrMkcXK7s4y3AFxZNy_hFPiv0VGrL1EPI',
-      authDomain: 'hierarchy-2cc18.firebaseapp.com',
-      projectId: 'hierarchy-2cc18',
-      storageBucket: 'hierarchy-2cc18.appspot.com',
-      messagingSenderId: '819311790917',
-      appId: '1:819311790917:web:0898457ddde70186d1cc2c',
+      apiKey: process.env.REACT_APP_FB_API_KEY ?? '',
+      authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN ?? '',
+      projectId: process.env.REACT_APP_FB_PROJECT_ID ?? '',
+      storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET ?? '',
+      messagingSenderId: process.env.REACT_APP_FB_MESSAGING_SENDER_ID ?? '',
+      appId: process.env.REACT_APP_FB_APP_ID ?? '',
     };
     firebase.initializeApp(firebaseConfig);
   },
